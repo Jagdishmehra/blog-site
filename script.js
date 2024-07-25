@@ -1,14 +1,12 @@
-// Client
 
-// Get stored data
 let storedToken = localStorage.getItem('jwtToken');
 let storedUsername = localStorage.getItem('username');
 
-// Set the username in the HTML
+
 const usernameElement = document.getElementById('username');
 usernameElement.textContent = storedUsername;
 
-// Load page and event listeners
+
 document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = window.location.origin;
     fetchPosts(baseUrl);
@@ -34,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 });
 
-// Post details
+
 const postDetailContainer = document.getElementById('post-detail-container');
 
-// Add a listener for detail page
+
 window.addEventListener('load', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('post');
@@ -46,7 +44,7 @@ window.addEventListener('load', () => {
     }
 });
 
-// Fetch posts
+
 async function fetchPosts(baseUrl) {
     const res = await fetch(`${baseUrl}/posts`);
     const data = await res.json();
@@ -97,12 +95,12 @@ async function createPost(event, baseUrl) {
   const contentInput = document.getElementById('content');
   const imageUrlInput = document.getElementById('image-url');
 
-  // Get the values from the input fields
+ 
   const title = titleInput.value;
   const content = contentInput.value;
   const imageUrl = imageUrlInput.value;
 
-  // Ensure that inputs are not empty
+  
   if (!title || !content || !imageUrl) {
     alert('Please fill in all fields 1.');
     return;
@@ -137,7 +135,7 @@ async function createPost(event, baseUrl) {
       const storedRole = localStorage.getItem('userRole');
       console.error(`Error creating the post: HTTP Status ${response.status}`);
     } else {
-      // Clear the input data
+      
       titleInput.value = '';
       contentInput.value = '';
       imageUrlInput.value = '';
@@ -150,7 +148,7 @@ async function createPost(event, baseUrl) {
   fetchPosts(baseUrl);
 }
 
-// Delete Post
+
 async function deletePost(postId, baseUrl) {
   const deleteUrl = `${baseUrl}/posts/${postId}`;
   try {
@@ -173,7 +171,7 @@ async function deletePost(postId, baseUrl) {
   }
 }
 
-// Update form
+
 function showUpdateForm(postId, title, content) {
   const updateForm = `
     <form id="update-form">
@@ -190,14 +188,14 @@ function showUpdateForm(postId, title, content) {
   form.addEventListener('submit', (event) => updatePost(event, postId));
 }
 
-// Update post
+
 async function updatePost(event, postId) {
   event.preventDefault();
   const title = document.getElementById('update-title').value;
   const content = document.getElementById('update-content').value;
   const baseUrl = window.location.origin;
 
-  // ensure that inputs are not empty
+  
   if (!title || !content) {
     alert('Please fill in all fields 2.');
     return;
@@ -241,7 +239,7 @@ async function registerUser(event, baseUrl) {
   const password = passwordInput.value;
   const role = roleInput.value;
 
-  // ensure that inputs are not empty
+  
   if (!username || !password || !role) {
     alert('Please fill in all fields 3.');
     return;
@@ -274,7 +272,7 @@ async function registerUser(event, baseUrl) {
   }
 }
 
-// Loging user
+
 async function loginUser(event, baseUrl) {
   event.preventDefault();
   const usernameInput = document.getElementById('login-username');
@@ -307,11 +305,11 @@ async function loginUser(event, baseUrl) {
     localStorage.setItem('userRole', data.role);
     localStorage.setItem('username', username);
 
-    // Close the hamburge menu if open
+    
     linksContainer.classList.toggle('active');
     hamburger.classList.toggle('active');
 
-    // Clear input fields
+    
     usernameInput.value = '';
     passwordInput.value = '';
 
@@ -325,7 +323,7 @@ async function loginUser(event, baseUrl) {
   }
 }
 
-// Admin features
+
 function showAdminFeatures() {
   const newPostDiv = document.getElementById('new-post-div');
   if (newPostDiv) {
@@ -340,7 +338,7 @@ function showAdminFeatures() {
   });
 }
 
-// Logout
+
 document.addEventListener('DOMContentLoaded', () => {
   const baseUrl = window.location.origin;
   const registerDiv = document.getElementById('register-div');
